@@ -23,70 +23,66 @@ export default function Post(props) {
             setIsLiked(true)
             setContador(contador + 1)
         }
-        else if (isLiked === true) {
-            setIsLiked(false)
-            setContador(contador - 1)
-
-        }
     }
+}
 
-    function curtirPost() {
-        if (isLiked === false) {
-            setIsLiked(true)
-            setContador(contador + 1)
-        }
-        else if (isLiked === true) {
-            setIsLiked(false)
-            setContador(contador - 1)
-
-        }
+function curtirPost() {
+    if (isLiked === false) {
+        setIsLiked(true)
+        setContador(contador + 1)
+    }
+    else if (isLiked === true) {
+        setIsLiked(false)
+        setContador(contador - 1)
 
     }
 
-    return (
-        <div data-test='post' class="post">
-            <div class="topo">
-                <div class="usuario">
-                    <img src={props.perfilUsuario} alt="meowed" />
-                    {props.nomeUsuario}
+}
+
+return (
+    <div data-test='post' class="post">
+        <div class="topo">
+            <div class="usuario">
+                <img src={props.perfilUsuario} alt="meowed" />
+                {props.nomeUsuario}
+            </div>
+            <div class="acoes">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </div>
+        </div>
+
+        <div onClick={curtirPelaImagem} class="conteudo" data-test="post-image">
+            <img src={props.imgPost} alt="gato-telefone" />
+        </div>
+
+        <div class="fundo">
+            <div class="acoes">
+                <div>
+                    {!isLiked ? <ion-icon onClick={curtirPost} name="heart-outline" data-test="like-post"></ion-icon>
+                        :
+                        <ion-icon onClick={curtirPost} class="vermelho" name="heart" data-test="like-post"></ion-icon>
+                    }
+                    <ion-icon name="chatbubble-outline"></ion-icon>
+                    <ion-icon name="paper-plane-outline"></ion-icon>
                 </div>
-                <div class="acoes">
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
+                <div>
+                    {
+                        !isSaved ?
+                            <ion-icon onClick={salvarPost} name="bookmark-outline" data-test="save-post"></ion-icon>
+                            :
+                            <ion-icon onClick={salvarPost} name="bookmark" data-test="save-post"></ion-icon>
+                    }
                 </div>
             </div>
 
-            <div onClick={curtirPelaImagem} class="conteudo" data-test="post-image">
-                <img src={props.imgPost} alt="gato-telefone" />
-            </div>
-
-            <div class="fundo">
-                <div class="acoes">
-                    <div>
-                        {!isLiked ? <ion-icon onClick={curtirPost}  name="heart-outline" data-test="like-post"></ion-icon>
-                                  :
-                                    <ion-icon onClick={curtirPost} class="vermelho" name="heart" data-test="like-post"></ion-icon>
-                        }
-                        <ion-icon name="chatbubble-outline"></ion-icon>
-                        <ion-icon name="paper-plane-outline"></ion-icon>
-                    </div>
-                    <div>
-                        {
-                            !isSaved ?
-                                <ion-icon onClick={salvarPost} name="bookmark-outline" data-test="save-post"></ion-icon>
-                                :
-                                <ion-icon onClick={salvarPost} name="bookmark" data-test="save-post"></ion-icon>
-                        }
-                    </div>
-                </div>
-
-                <div class="curtidas">
-                    <img src={props.imgQuemCurtiu} alt="respondeai" />
-                    <div class="texto">
-                        Curtido por <strong>{props.quemCurtiu}</strong> e <strong>outras <span data-test="likes-number">{contador}</span> pessoas</strong>
-                    </div>
+            <div class="curtidas">
+                <img src={props.imgQuemCurtiu} alt="respondeai" />
+                <div class="texto">
+                    Curtido por <strong>{props.quemCurtiu}</strong> e <strong>outras <span data-test="likes-number">{contador}</span> pessoas</strong>
                 </div>
             </div>
         </div>
-    )
+    </div>
+)
 
 }
