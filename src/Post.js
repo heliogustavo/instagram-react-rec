@@ -23,7 +23,7 @@ export default function Post(props) {
             setIsLiked(true)
             setContador(contador + 1)
         }
-    }
+    
 }
 
 function curtirPost() {
